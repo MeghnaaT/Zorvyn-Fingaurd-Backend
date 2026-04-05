@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from app.db.session import engine
 from app.db.base import Base
 from app.api.routes import auth, transactions, analytics
+from fastapi.security import HTTPBearer
+security = HTTPBearer()
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI(tittle="FinGaurd API")
