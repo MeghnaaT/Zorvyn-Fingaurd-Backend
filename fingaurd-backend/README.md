@@ -1,63 +1,157 @@
-FinGuard – Secure Finance Analytics Backend
-Overview
+# FinGuard – Secure Finance Analytics Backend
 
-FinGuard is a backend system designed to manage personal financial data securely. It provides APIs for handling transactions and generating useful insights such as total income, expenses, and balance.
+## Overview
 
-The system focuses on security, clean architecture, and scalability rather than just basic CRUD functionality.
+FinGuard is a backend system built to manage financial transactions securely and provide useful insights through analytics. The project focuses on implementing authentication, role-based access control, and structured API design rather than just basic CRUD operations.
 
-Key Features
-User registration and login using JWT authentication
-Role-based access control (admin vs user)
-Secure password storage using bcrypt hashing
-Transaction management (create and retrieve data)
-Analytics endpoint for financial summaries
-Integrated API documentation using Swagger UI
-Tech Stack
-FastAPI
-SQLAlchemy
-SQLite
-python-jose (JWT handling)
-passlib (password hashing)
-How to Run
-Clone the repository
-git clone https://github.com/<your-username>/finguard-backend.git
+---
+
+## Features
+
+* User registration and login using JWT authentication
+* Role-based access control (admin and user)
+* Secure password hashing using bcrypt
+* Transaction management (create, update, delete, view)
+* Filtering transactions by type and category
+* Financial summary (income, expense, balance)
+* User-specific data isolation (each user accesses only their data)
+* Admin override (admin can access all users' data)
+* Interactive API testing using Swagger UI
+
+---
+
+## Tech Stack
+
+* FastAPI
+* SQLAlchemy
+* SQLite
+* python-jose (JWT handling)
+* passlib (bcrypt hashing)
+
+---
+
+## Project Structure
+
+```
+app/
+ ├── api/routes/        # API endpoints
+ ├── models/            # Database models
+ ├── schemas/           # Request/response schemas
+ ├── services/          # Business logic
+ ├── dependencies/      # Auth & DB dependencies
+ ├── db/                # Database setup
+ └── main.py            # Entry point
+```
+
+---
+
+## Setup Instructions
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/<MeghnaaT>/finguard-backend.git
 cd finguard-backend
-Create and activate virtual environment
+```
+
+---
+
+### 2. Create virtual environment
+
+```
 python -m venv venv
 venv\Scripts\activate
-Install dependencies
+```
+
+---
+
+### 3. Install dependencies
+
+```
 pip install -r requirements.txt
-Start the server
+```
+
+---
+
+### 4. Run the server
+
+```
 uvicorn app.main:app --reload
-Open API docs
+```
+
+---
+
+### 5. Open API Docs
+
+```
 http://127.0.0.1:8000/docs
-Authentication Flow
-Register a user
-Login to receive an access token
-Use the Authorize button in Swagger
-Access protected endpoints
-API Endpoints
-Auth
-POST /auth/register
-POST /auth/login
-Transactions
-POST /transactions
-GET /transactions
-Analytics
-GET /analytics/summary (admin only)
-Project Structure
+```
 
-The project follows a modular backend structure:
+---
 
-Routes → API endpoints
-Models → Database schema
-Services → Business logic
-Dependencies → Auth and DB handling
+## Authentication Flow
 
-This separation keeps the codebase clean and maintainable.
+1. Register a user using `/auth/register`
+2. Login using `/auth/login`
+3. Copy the access token
+4. Click **Authorize 🔒** in Swagger
+5. Paste token as:
 
-Notes
+   ```
+   Bearer <your_token>
+   ```
+6. Access protected endpoints
 
-This project was built as a backend-focused system to demonstrate secure API design, authentication handling, and structured development practices.
+---
 
-Author: Meghna Tiwari
+## API Endpoints
+
+### Auth
+
+* POST `/auth/register`
+* POST `/auth/login`
+
+### Transactions
+
+* POST `/transactions`
+* GET `/transactions`
+* PUT `/transactions/{id}`
+* DELETE `/transactions/{id}`
+
+### Analytics
+
+* GET `/analytics/summary`
+
+---
+
+## Test Credentials
+
+```
+Admin:
+admin@test.com / 123456
+
+User:
+user@test.com / 123456
+```
+
+---
+
+## Key Design Decisions
+
+* JWT is used for stateless authentication
+* Dependency-based role checks enforce access control
+* Transactions are scoped per user for data security
+* Admin override allows full system visibility
+* Business logic is separated into services for clarity
+
+---
+
+## Notes
+
+This project is designed to demonstrate backend fundamentals such as authentication, authorization, database handling, and API structuring. It can be extended with features like pagination, advanced analytics, or deployment configurations.
+
+---
+
+## Author
+
+Meghna Tiwari
